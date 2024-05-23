@@ -1,8 +1,10 @@
 ﻿@{
-    ViewBag.Title="Employee list";
-
+    ViewData["Title"] = "Employee List";
 }
-<pre>
-    @ViewBag.EmployeeDetails
-</pre>
 
+<h2>Employee List</h2>
+<div>
+    <a asp-action="CreateNewEmployee" class="btn btn-primary">Create New Employee</a>
+</div>
+<br />
+<pre>@ViewBag.EmployeeDetails</pre>

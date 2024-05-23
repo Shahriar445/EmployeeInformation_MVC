@@ -1,4 +1,5 @@
 ﻿using EmployeeInformation.Interface;
+using EmployeeInformation.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeInformation.Controllers
@@ -15,8 +16,28 @@ namespace EmployeeInformation.Controllers
         {
             var employeeDetails = _employeRepository.DisplayEmployees();
             ViewBag.EmployeeDetails = employeeDetails;
+           
             return View();
         }
 
+        public IActionResult CreateNewEmployee()
+        {
+            return View("Create");
+        }
+        public IActionResult Create(EmployeeModel employee)
+        {           
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult submit(EmployeeModel employee)
+        {
+           
+                _employeRepository.Create(employee);
+                _employeRepository.WriteToJson();
+                TempData["SuccessMessage"] = "Employee created successfully!";
+                return RedirectToAction(nameof(Index));
+            
+        }
     }
 }

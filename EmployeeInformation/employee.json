@@ -1,12 +1,12 @@
 [
   {
-    "Id": 1,
-    "Name": "t",
-    "Code": "h",
-    "Dob": "h",
-    "DateofJoing": "",
-    "BloodGroup": "h",
-    "DepartmentId": 7,
-    "IsActive": false
+    "Id": 3,
+    "Name": "df",
+    "Code": "df",
+    "Dob": null,
+    "DateofJoing": null,
+    "BloodGroup": "df",
+    "DepartmentId": 4,
+    "IsActive": true
   }
 ]

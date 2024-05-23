@@ -1,0 +1,66 @@
+﻿@model EmployeeInformation.Models.EmployeeModel
+
+@{
+    ViewData["Title"] = "Create Employee";
+    
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success" role="alert">
+        @successMessage
+    </div>
+}
+
+<h2>Create Employee</h2>
+
+<form asp-controller="Employee" asp-action="Submit" method="post">
+    <div class="form-group">
+        <label asp-for="Id" class="control-label"></label>
+        <input asp-for="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Code" class="control-label"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartmentId" class="control-label"></label>
+        <input asp-for="DepartmentId" class="form-control" />
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BloodGroup" class="control-label"></label>
+        <input asp-for="BloodGroup" class="form-control" />
+        <span asp-validation-for="BloodGroup" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DateofJoing" class="control-label"></label>
+        <input asp-for="DateofJoing" class="form-control" type="date" />
+        <span asp-validation-for="DateofJoing" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dob" class="control-label"></label>
+        <input asp-for="Dob" class="form-control" type="date" />
+        <span asp-validation-for="Dob" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsActive" class="control-label"></label>
+        <select asp-for="IsActive" class="form-control">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+    </div>
+</form>

@@ -8,12 +8,16 @@ namespace EmployeeInformation.IRepository
     public class EmployeeRepository : IEmployee
     {
 
-        string Path = @"C:\\Users\\Hameem\\Desktop\\Intern - Shahriar Haque (Shipon)\\Core MVC\\EmployeeInformation\\EmployeeInformation\\employee.json";
-        List<EmployeeModel> employees = new List<EmployeeModel>();
+       private readonly string Path = @"C:\\Users\\Hameem\\Desktop\\Intern - Shahriar Haque (Shipon)\\Core MVC\\EmployeeInformation\\EmployeeInformation\\employee.json";
+      private  List<EmployeeModel> _employees = new List<EmployeeModel>();
 
-        public string CreateEmployee()
+
+        //Create Employee 
+        public string Create(EmployeeModel employee)
         {
-            throw new NotImplementedException();
+            _employees.Add(employee);
+            WriteToJson();
+            return Path;
         }
 
         public string DeleteEmployee()
@@ -25,9 +29,17 @@ namespace EmployeeInformation.IRepository
 
         public void ReadFromJson()
         {
-            var op = File.ReadAllText(Path);
+            try
+            {
+                var op = File.ReadAllText(Path);
 
-            employees = JsonSerializer.Deserialize<List<EmployeeModel>>(op);
+                _employees = JsonSerializer.Deserialize<List<EmployeeModel>>(op);
+            }
+            catch(Exception e)
+            {
+                
+            }
+            
             
         }
 
@@ -40,7 +52,7 @@ namespace EmployeeInformation.IRepository
         {
             ReadFromJson();
             var employeeDisplay = new StringBuilder();
-            foreach (var employee in employees)
+            foreach (var employee in _employees)
             {
 
                 employeeDisplay.AppendLine($"Employee Id: {employee.Id}");
@@ -56,10 +68,27 @@ namespace EmployeeInformation.IRepository
             return employeeDisplay.ToString();
         }
 
-        void IEmployee.ReadToJson()
+        // here update all the customr details to json files 
+        public void WriteToJson()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                var json = JsonSerializer.Serialize(_employees, options);
+                File.WriteAllText(Path, json);
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception here, e.g., log the error
+                Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
+            }
         }
+
+
+
     }
 
 
