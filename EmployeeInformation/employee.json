@@ -1,0 +1,12 @@
+[
+  {
+    "Id": 1,
+    "Name": "t",
+    "Code": "h",
+    "Dob": "h",
+    "DateofJoing": "",
+    "BloodGroup": "h",
+    "DepartmentId": 7,
+    "IsActive": false
+  }
+]
