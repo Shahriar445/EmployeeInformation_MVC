@@ -8,22 +8,18 @@ namespace EmployeeInformation.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IEmployee _employeRepository;
-
-        public HomeController(ILogger<HomeController> logger, IEmployee employeeRepository)
-        {
-            _logger = logger;
-            _employeRepository = employeeRepository;
-        }
-
-        public IActionResult Index()
-        {
-            var employeeDetails = _employeRepository.DisplayEmployees();
-            ViewBag.EmployeeDetails = employeeDetails;
-            return View();
-        }
        
 
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+           
+        }
+        public IActionResult Index()
+        {
+            return View();
+
+        }
         public IActionResult Privacy()
         {
             return View();
