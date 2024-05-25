@@ -1,4 +1,5 @@
 ﻿using EmployeeInformation.Interface;
+using EmployeeInformation.IRepository;
 using EmployeeInformation.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,5 +45,25 @@ namespace EmployeeInformation.Controllers
                 return RedirectToAction(nameof(Index));
             
         }
+
+       
+        public IActionResult Delete(int id)
+        {
+            var employee = _employeRepository.DeleteEmployee(id);
+            if (employee == null)
+            {
+                return NotFound(); // Or handle the case when the employee is not found
+            }
+
+            return View("Delete");
+        }
+        [HttpPost]
+        public IActionResult ConfirmDelete(int id)
+        {
+            var result = _employeRepository.DeleteEmployee(id);
+            TempData["DeleteMessage"] = result;
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace EmployeeInformation.IRepository
     public class EmployeeRepository : IEmployee
     {
 
-       private readonly string Path = @"C:\\Users\\Hameem\\Desktop\\Intern - Shahriar Haque (Shipon)\\Core MVC\\EmployeeInformation\\EmployeeInformation\\employee.json";
+       private readonly string Path = @"C:\Users\Hameem\Desktop\Intern - Shahriar Haque (Shipon)\Core MVC\EmployeeInformation\EmployeeInformation\employee.json";
       private  List<EmployeeModel> _employees = new List<EmployeeModel>();
 
 
@@ -20,14 +20,23 @@ namespace EmployeeInformation.IRepository
             return Path;
         }
 
-        public string DeleteEmployee()
+        public string DeleteEmployee(int id)
         {
-            throw new NotImplementedException();
+            ReadFromJson(); // Ensure the current state of Employees is loaded
+            var employeeToDelet= _employees.FirstOrDefault(x => x.Id == id);
+            if (employeeToDelet != null)
+            {
+                _employees.Remove(employeeToDelet);
+                WriteToJson(employeeToDelet);  // update to Json file 
+                return "Employee deleted successfully.";
+            }
+            else
+            {
+                return "Employee not found.";
+            }
         }
 
-       
-
-        public void ReadFromJson()
+        public void ReadFromJson() // Read All Employee List From Employee.Json 
         {
             try
             {
@@ -43,7 +52,6 @@ namespace EmployeeInformation.IRepository
             
         }
 
-      
         public string UpdateEmployee()
         {
             throw new NotImplementedException();
@@ -52,40 +60,23 @@ namespace EmployeeInformation.IRepository
         {
             ReadFromJson();
             var employeeDisplay = new StringBuilder();
-            foreach (var employee in _employees)
+            foreach (var employeePrint in _employees)
             {
 
-                employeeDisplay.AppendLine($"Employee Id: {employee.Id}");
-                employeeDisplay.AppendLine($"Employee Name: {employee.Name}");
-                employeeDisplay.AppendLine($"Employee Code: {employee.Code}");
-                employeeDisplay.AppendLine($"Employee Department: {employee.DepartmentId}");
-                employeeDisplay.AppendLine($"Employee Blood Group: {employee.BloodGroup}");
-                employeeDisplay.AppendLine($"Employee Date of Joining: {employee.DateofJoing}");
-                employeeDisplay.AppendLine($"Employee Date of Birth: {employee.Dob}");
-                employeeDisplay.AppendLine($"Employee Active/InActive: {employee.IsActive}");
+                employeeDisplay.AppendLine($"Employee Id: {employeePrint.Id}");
+                employeeDisplay.AppendLine($"Employee Name: {employeePrint.Name}");
+                employeeDisplay.AppendLine($"Employee Code: {employeePrint.Code}");
+                employeeDisplay.AppendLine($"Employee Department: {employeePrint.DepartmentId}");
+                employeeDisplay.AppendLine($"Employee Blood Group: {employeePrint.BloodGroup}");
+                employeeDisplay.AppendLine($"Employee Date of Joining: {employeePrint.DateofJoing}");
+                employeeDisplay.AppendLine($"Employee Date of Birth: {employeePrint.Dob}");
+                employeeDisplay.AppendLine($"Employee Active/InActive: {employeePrint.IsActive}");
                 employeeDisplay.AppendLine();
             }
             return employeeDisplay.ToString();
         }
 
         // here update all the customr details to json files 
-        //public void WriteToJson()
-        //{
-        //    try
-        //    {
-        //        var options = new JsonSerializerOptions
-        //        {
-        //            WriteIndented = true
-        //        };
-        //        var json = JsonSerializer.Serialize(_employees, options);
-        //        File.WriteAllText(Path, json);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle the exception here, e.g., log the error
-        //        Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
-        //    }
-        //}
         public void WriteToJson(EmployeeModel newEmployee)
         {
             try
@@ -120,7 +111,7 @@ namespace EmployeeInformation.IRepository
                 Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
             }
         }
-        public int GetNextId()
+        public int GetNextId() // auto E_id Increment 
         {
             ReadFromJson(); // Read the existing employees
             if (_employees.Count == 0)

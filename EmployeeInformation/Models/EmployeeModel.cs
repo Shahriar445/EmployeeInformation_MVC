@@ -22,11 +22,11 @@ namespace EmployeeInformation.Models
 
         [Required(ErrorMessage = "Date of Joining is required.")]
         [DataType(DataType.Date)]
-        public DateTime DateofJoing { get; set; }
+        public string DateofJoing { get; set; }
 
         [Required(ErrorMessage = "Date of Birth is required.")]
         [DataType(DataType.Date)]
-        public DateTime Dob { get; set; }
+        public string Dob { get; set; }
 
         [Required(ErrorMessage = "Active status is required.")]
         public bool IsActive { get; set; }

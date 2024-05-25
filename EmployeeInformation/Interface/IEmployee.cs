@@ -7,12 +7,13 @@ namespace EmployeeInformation.Interface
 
 
         public string Create(EmployeeModel employee);
-        public string DeleteEmployee();
-        public string UpdateEmployee();
+        public string DeleteEmployee(int id); // Working on 
+        public string UpdateEmployee(); 
 
         public void ReadFromJson();// done
         public void WriteToJson(EmployeeModel employee); //done
-        public int GetNextId();
         public string DisplayEmployees(); // done
+        public int GetNextId(); //done . This method work on auto increment E_Id
+      
     }
 }
