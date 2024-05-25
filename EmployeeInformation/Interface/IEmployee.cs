@@ -17,6 +17,8 @@ namespace EmployeeInformation.Interface
         public string UpdateEmployee(EmployeeModel employee); //working on it
         public EmployeeModel GetEmployeeById(int id);
 
+        public string Login();
+
 
     }
 }

@@ -177,8 +177,6 @@ namespace EmployeeInformation.IRepository
         }
 
 
-
-
     }
 
 
