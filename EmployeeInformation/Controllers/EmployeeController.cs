@@ -27,12 +27,10 @@ namespace EmployeeInformation.Controllers
                 return View("Error");
             }
         }
-
         public IActionResult CreateNewEmployee()
         {
             return View("Create");
         }
-
         public IActionResult Create(EmployeeModel employee)
         {
             try
@@ -70,12 +68,36 @@ namespace EmployeeInformation.Controllers
             }
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete()
         {
             try
             {
-                
                 return View("Delete");
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+        public IActionResult Update()
+        {
+            try
+            {
+                return View("Update");
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
+
+        public IActionResult ConfirmUpdate(EmployeeModel employee)
+        {
+            try
+            {
+                var result = _employeRepository.UpdateEmployee(employee);
+                TempData["UpdateMessage"] = result;
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -85,7 +107,6 @@ namespace EmployeeInformation.Controllers
 
         [HttpPost]
         public IActionResult ConfirmDelete(int id)
-        
         {
             try
             {

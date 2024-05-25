@@ -1,58 +1,55 @@
 ﻿@model EmployeeInformation.Models.EmployeeModel
 
 @{
-    ViewData["Title"] = "Create Employee";
+    ViewData["Title"] = "Update Employee";
 }
 
-<h2>Create Employee</h2>
+<h2>Update Employee</h2>
 
-<form asp-controller="Employee" asp-action="Submit" method="post">
+<p>Are you sure you want to update the following employee?</p>
+<form asp-controller="Employee" asp-action="ConfirmUpdate" method="post">
     <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
+        <label asp-for="Id" class="control-label">Employee ID</label>
+        <input asp-for="Id" class="form-control"  />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Code" class="control-label"></label>
+        <label asp-for="Code" class="control-label">Code</label>
         <input asp-for="Code" class="form-control" />
         <span asp-validation-for="Code" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="DepartmentId" class="control-label"></label>
+        <label asp-for="DepartmentId" class="control-label">Department ID</label>
         <input asp-for="DepartmentId" class="form-control" />
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="BloodGroup" class="control-label"></label>
+        <label asp-for="BloodGroup" class="control-label">Blood Group</label>
         <input asp-for="BloodGroup" class="form-control" />
         <span asp-validation-for="BloodGroup" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="DateofJoing" class="control-label"></label>
-        <input asp-for="DateofJoing" class="form-control" />
+        <label asp-for="DateofJoing" class="control-label">Date of Joining</label>
+        <input asp-for="DateofJoing" class="form-control" type="date" />
         <span asp-validation-for="DateofJoing" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Dob" class="control-label"></label>
-        <input asp-for="Dob" class="form-control"  />
+        <label asp-for="Dob" class="control-label">Date of Birth</label>
+        <input asp-for="Dob" class="form-control" type="date" />
         <span asp-validation-for="Dob" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="IsActive" class="control-label"></label>
+        <label asp-for="IsActive" class="control-label">Active</label>
         <select asp-for="IsActive" class="form-control">
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
         <span asp-validation-for="IsActive" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Submit" class="btn btn-primary" />
-        <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Cancel</a>
-    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

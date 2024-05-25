@@ -22,18 +22,26 @@ namespace EmployeeInformation.IRepository
 
         public string DeleteEmployee(int id)
         {
-            ReadFromJson(); // Ensure the current state of Employees is loaded
-            var employeeToDelete = _employees.FirstOrDefault(x => x.Id == id);
-            if (employeeToDelete != null)
+            try
             {
-                _employees.Remove( employeeToDelete);
-                WriteToJson_for_Update();  // update to Json file 
-                return "Employee deleted successfully.";
-            }
-            else
+                ReadFromJson(); // Ensure the current state of Employees is loaded
+                var employeeToDelete = _employees.FirstOrDefault(x => x.Id == id);
+                if (employeeToDelete != null)
+                {
+                    _employees.Remove(employeeToDelete);
+                    WriteToJson_for_Update();  // update to Json file 
+                    return "Employee deleted successfully.";
+                }
+                else
+                {
+                    return "Employee not found.";
+                }
+
+            }catch(Exception ex)
             {
-                return "Employee not found.";
+                return "Not Valid Excepetions";
             }
+           
         }
 
         public void ReadFromJson() // Read All Employee List From Employee.Json 
@@ -46,14 +54,40 @@ namespace EmployeeInformation.IRepository
             }
             catch(Exception e)
             {
-                Console.WriteLine($"Error occurred while reading from JSON file: {e.Message}");
+                // $"Error occurred while reading from JSON file: {e.Message}";
+              
             }
             
             
         }
-
-        public string UpdateEmployee()
+        public EmployeeModel GetEmployeeById(int id)
         {
+            ReadFromJson();
+            return _employees.FirstOrDefault(x => x.Id == id);
+        }
+        public string UpdateEmployee(EmployeeModel _updatedEmployee)
+        {
+            ReadFromJson();
+            var employeeToUpdate = _employees.FirstOrDefault(x => x.Id == _updatedEmployee.Id);
+            if (employeeToUpdate != null)
+            {
+                // Update the employee details
+                employeeToUpdate.Name = _updatedEmployee.Name;
+                employeeToUpdate.Code = _updatedEmployee.Code;
+                employeeToUpdate.DepartmentId = _updatedEmployee.DepartmentId;
+                employeeToUpdate.BloodGroup = _updatedEmployee.BloodGroup;
+                employeeToUpdate.DateofJoing = _updatedEmployee.DateofJoing;
+                employeeToUpdate.Dob = _updatedEmployee.Dob;
+                employeeToUpdate.IsActive = _updatedEmployee.IsActive;
+
+                WriteToJson_for_Update(); // Update the JSON file
+                return "Employee updated successfully.";
+            }
+            else
+            {
+                return "Employee not found.";
+            }   
+
             throw new NotImplementedException();
         }
         public string DisplayEmployees()
@@ -132,7 +166,7 @@ namespace EmployeeInformation.IRepository
                 Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
             }
         }
-        public int GetNextId() // auto E_id Increment 
+        public int GetNextId() // auto E_id Increment  
         {
             ReadFromJson(); // Read the existing employees
             if (_employees.Count == 0)

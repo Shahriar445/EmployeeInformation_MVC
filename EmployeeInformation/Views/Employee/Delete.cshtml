@@ -8,16 +8,9 @@
 
 <div>
     <p>Are you sure you want to delete the following employee?</p>
-
-
-
-   
-
      <form asp-controller="Employee" asp-action="ConfirmDelete" method="post">
-       
         <label asp-for="Id" class="control-label">Enter Employee to Delete</label>
         <input asp-for="Id" calss="form-control" />
-
         <button type="submit" class="btn btn-danger">Confirm Delete</button>
         <a asp-controller="Employee" asp-action="Index" class="btn btn-secondary">Cancel</a>
     </form> 
