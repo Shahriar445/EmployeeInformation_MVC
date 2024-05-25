@@ -11,7 +11,8 @@ namespace EmployeeInformation.Interface
         public string UpdateEmployee();
 
         public void ReadFromJson();// done
-        public void WriteToJson();
+        public void WriteToJson(EmployeeModel employee); //done
+        public int GetNextId();
         public string DisplayEmployees(); // done
     }
 }

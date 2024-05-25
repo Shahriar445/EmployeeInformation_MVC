@@ -1,7 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Employee List";
+
+    var successMessage = TempData["SuccessMessage"] as string;
 }
 
+
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
 <h2>Employee List</h2>
 <div>
     <a asp-action="CreateNewEmployee" class="btn btn-primary">Create New Employee</a>

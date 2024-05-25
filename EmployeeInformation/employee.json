@@ -1,12 +1,42 @@
 [
   {
-    "Id": 3,
-    "Name": "df",
-    "Code": "df",
+    "Id": 1,
+    "Name": "Pangeran Halim",
+    "Code": "dfd",
     "Dob": null,
     "DateofJoing": null,
-    "BloodGroup": "df",
-    "DepartmentId": 4,
+    "BloodGroup": null,
+    "DepartmentId": 0,
+    "IsActive": true
+  },
+  {
+    "Id": 2,
+    "Name": "Pangeran Halim5",
+    "Code": null,
+    "Dob": null,
+    "DateofJoing": null,
+    "BloodGroup": null,
+    "DepartmentId": 0,
+    "IsActive": true
+  },
+  {
+    "Id": 3,
+    "Name": "Pangeran Halim5",
+    "Code": null,
+    "Dob": null,
+    "DateofJoing": null,
+    "BloodGroup": null,
+    "DepartmentId": 0,
+    "IsActive": true
+  },
+  {
+    "Id": 4,
+    "Name": "Shahriar (Shipon)",
+    "Code": null,
+    "Dob": null,
+    "DateofJoing": null,
+    "BloodGroup": null,
+    "DepartmentId": 0,
     "IsActive": true
   }
 ]

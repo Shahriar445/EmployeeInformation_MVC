@@ -32,9 +32,14 @@ namespace EmployeeInformation.Controllers
         [HttpPost]
         public IActionResult submit(EmployeeModel employee)
         {
-           
-                _employeRepository.Create(employee);
-                _employeRepository.WriteToJson();
+            if (!ModelState.IsValid)
+            {
+                return View("Create");
+            }
+
+            employee.Id =_employeRepository.GetNextId(); // Assign the next ID
+             // _employeRepository.Create(employee);
+            _employeRepository.WriteToJson(employee); // Save to Json file 
                 TempData["SuccessMessage"] = "Employee created successfully!";
                 return RedirectToAction(nameof(Index));
             

@@ -16,7 +16,7 @@ namespace EmployeeInformation.IRepository
         public string Create(EmployeeModel employee)
         {
             _employees.Add(employee);
-            WriteToJson();
+            WriteToJson( employee);
             return Path;
         }
 
@@ -37,7 +37,7 @@ namespace EmployeeInformation.IRepository
             }
             catch(Exception e)
             {
-                
+                Console.WriteLine($"Error occurred while reading from JSON file: {e.Message}");
             }
             
             
@@ -69,15 +69,49 @@ namespace EmployeeInformation.IRepository
         }
 
         // here update all the customr details to json files 
-        public void WriteToJson()
+        //public void WriteToJson()
+        //{
+        //    try
+        //    {
+        //        var options = new JsonSerializerOptions
+        //        {
+        //            WriteIndented = true
+        //        };
+        //        var json = JsonSerializer.Serialize(_employees, options);
+        //        File.WriteAllText(Path, json);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle the exception here, e.g., log the error
+        //        Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
+        //    }
+        //}
+        public void WriteToJson(EmployeeModel newEmployee)
         {
             try
             {
+                
+                // Check if the file exists and read the existing employees
+                if (File.Exists(Path))
+                {
+                    var existingJson = File.ReadAllText(Path);
+                    if (!string.IsNullOrEmpty(existingJson))
+                    {
+                        _employees = JsonSerializer.Deserialize<List<EmployeeModel>>(existingJson);
+                    }
+                }
+
+                // Add the new employee to the list
+                _employees.Add(newEmployee);
+
+                // Serialize the updated list back to JSON
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true
                 };
                 var json = JsonSerializer.Serialize(_employees, options);
+
+                // Write the updated JSON to the file
                 File.WriteAllText(Path, json);
             }
             catch (Exception ex)
@@ -86,6 +120,16 @@ namespace EmployeeInformation.IRepository
                 Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
             }
         }
+        public int GetNextId()
+        {
+            ReadFromJson(); // Read the existing employees
+            if (_employees.Count == 0)
+            {
+                return 1;
+            }
+            return _employees.Max(e => e.Id) + 1;
+        }
+
 
 
 
