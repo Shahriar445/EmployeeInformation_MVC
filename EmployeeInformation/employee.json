@@ -1,22 +1,12 @@
 [
   {
-    "Id": 1,
-    "Name": "Pangeran Halim",
-    "Code": "dfd",
-    "DepartmentId": 9,
-    "BloodGroup": "o-",
+    "Id": 3,
+    "Name": "f7ufg",
+    "Code": "mhgbjyh",
+    "DepartmentId": 5,
+    "BloodGroup": "agf",
     "DateofJoing": "2024-05-25",
-    "Dob": "2024-05-25",
-    "IsActive": true
-  },
-  {
-    "Id": 2,
-    "Name": "hyf",
-    "Code": "sdf",
-    "DepartmentId": 2,
-    "BloodGroup": "df",
-    "DateofJoing": "2024-05-25",
-    "Dob": "2024-05-25",
+    "Dob": "2024-05-23",
     "IsActive": true
   }
 ]

@@ -23,11 +23,11 @@ namespace EmployeeInformation.IRepository
         public string DeleteEmployee(int id)
         {
             ReadFromJson(); // Ensure the current state of Employees is loaded
-            var employeeToDelet= _employees.FirstOrDefault(x => x.Id == id);
-            if (employeeToDelet != null)
+            var employeeToDelete = _employees.FirstOrDefault(x => x.Id == id);
+            if (employeeToDelete != null)
             {
-                _employees.Remove(employeeToDelet);
-                WriteToJson(employeeToDelet);  // update to Json file 
+                _employees.Remove( employeeToDelete);
+                WriteToJson_for_Update();  // update to Json file 
                 return "Employee deleted successfully.";
             }
             else
@@ -75,7 +75,28 @@ namespace EmployeeInformation.IRepository
             }
             return employeeDisplay.ToString();
         }
+        public void WriteToJson_for_Update()
+        {
+            try
+            {
+                // Serialize the current list of employees to JSON
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                var json = JsonSerializer.Serialize(_employees, options);
 
+                // Write the updated JSON to the file
+                File.WriteAllText(Path, json);
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception here, e.g., log the error
+                Console.WriteLine($"Error occurred while writing to JSON file: {ex.Message}");
+            }
+
+
+        }
         // here update all the customr details to json files 
         public void WriteToJson(EmployeeModel newEmployee)
         {

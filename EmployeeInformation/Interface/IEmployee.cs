@@ -14,6 +14,8 @@ namespace EmployeeInformation.Interface
         public void WriteToJson(EmployeeModel employee); //done
         public string DisplayEmployees(); // done
         public int GetNextId(); //done . This method work on auto increment E_Id
-      
+        public void WriteToJson_for_Update();
+
+
     }
 }
