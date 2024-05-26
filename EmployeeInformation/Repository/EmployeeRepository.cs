@@ -176,7 +176,10 @@ namespace EmployeeInformation.IRepository
             return _employees.Max(e => e.Id) + 1;
         }
 
-
+        public string Login()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

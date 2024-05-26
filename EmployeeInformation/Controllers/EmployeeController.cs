@@ -1,10 +1,12 @@
 ﻿using EmployeeInformation.Interface;
 using EmployeeInformation.IRepository;
 using EmployeeInformation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeInformation.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployee _employeRepository;
@@ -12,7 +14,7 @@ namespace EmployeeInformation.Controllers
         {
             _employeRepository = employeeRepository;
         }
-
+       
         public IActionResult Index()
         {
             try
@@ -120,5 +122,7 @@ namespace EmployeeInformation.Controllers
                 return View("Error");
             }
         }
+
+      
     }
 }
